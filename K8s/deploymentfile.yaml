@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: cv-app
-        image: gcr.io/my-vision-project-283816/myapp:v1
+        image: gcr.io/datatonic-demo/github.com/boredomed/datatonic-demo-proj:006a54a552a19cb40cea1b8498fc71945dde5007
         ports:
         - containerPort: 8501
