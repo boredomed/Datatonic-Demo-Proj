@@ -21,11 +21,32 @@ with st.spinner('Loading Model Into Memory....'):
   model = load_model()
 
 classes = ['with_mask','without_mask']
+#image segmentation function
+def segment_image(image):
+    mask = create_mask_for_plant(image)
+    output = cv2.bitwise_and(image, image, mask = mask)
+    return output/255
+#sharpen the image
+def sharpen_image(image):
+    image_blurred = cv2.GaussianBlur(image, (0, 0), 3)
+    image_sharp = cv2.addWeighted(image, 1.5, image_blurred, -0.5, 0)
+    return image_sharp
+
+# function to get an image
+def read_img(filepath, size):
+    img = image.load_img(content), target_size=size)
+    #convert image to array
+    img = image.img_to_array(img)
+    return img
 
 def decode_img(image):
-  img = tf.image.decode_jpeg(image, channels=3)  
-  img = tf.image.resize(img,[255,255])
-  return np.expand_dims(img, axis=0)
+  #read image
+    img = read_img(file,(INPUT_SIZE,INPUT_SIZE))
+    #masking and segmentation
+    image_segmented = segment_image(img)
+    #sharpen
+    image_sharpen = sharpen_image(image_segmented)
+    return np.expand_dims(image_sharpen.copy(), axis=0)
 
 path = st.text_input('Enter Image URL to Classify.. ','https://storage.googleapis.com/image_classification_2021/Glacier-Argentina-South-America-blue-ice.JPEG')
 if path is not None:
