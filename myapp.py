@@ -33,8 +33,8 @@ def sharpen_image(image):
     return image_sharp
 
 # function to get an image
-def read_img(filepath, size):
-    img = image.load_img(content), target_size=size)
+def read_img(content, size):
+    img = image.load_img(content, target_size=size)
     #convert image to array
     img = image.img_to_array(img)
     return img
