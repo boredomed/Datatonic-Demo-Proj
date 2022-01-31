@@ -41,7 +41,7 @@ def read_img(content, size):
 
 def decode_img(image):
   #read image
-    img = read_img(file,(INPUT_SIZE,INPUT_SIZE))
+    img = read_img(image,(INPUT_SIZE,INPUT_SIZE))
     #masking and segmentation
     image_segmented = segment_image(img)
     #sharpen
