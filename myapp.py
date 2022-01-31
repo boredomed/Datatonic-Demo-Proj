@@ -1,12 +1,16 @@
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
+import keras
 import tensorflow as tf
 import numpy as np
 import streamlit as st
 from PIL import Image
 import requests
 from io import BytesIO
+from keras.applications import xception
+from keras.preprocessing import image
+from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
 st.title("Location Image Classifier")
